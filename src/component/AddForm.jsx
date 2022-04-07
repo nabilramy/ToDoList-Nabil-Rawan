@@ -1,4 +1,3 @@
-import React from 'react';
 
 export default function AddForm({
   title,
@@ -6,6 +5,9 @@ export default function AddForm({
   timetodo,
   handleChange,
   handleAddToList,
+  wantToEdit,
+  closeEdit,
+  ApplyEdit
 }) {
   return (
     <form>
@@ -25,15 +27,15 @@ export default function AddForm({
         onChange={handleChange}
         required
       />
-      <input
+   {!wantToEdit &&  ( <input
         type='datetime-local'
         value={timetodo}
         name='timetodo'
         placeholder='time...'
         onChange={handleChange}
         required
-      />
-      <button onClick={()=>handleAddToList(title,description,timetodo,)}>Add</button>
+      />)}
+      {wantToEdit ?  (<div className='two-btn'><button onClick={(event)=>{ApplyEdit(event)}}>Edit</button> <button onClick={closeEdit} >Close</button></div>): (<button onClick={handleAddToList}>Add</button>)}
     </form>
   );
 }
